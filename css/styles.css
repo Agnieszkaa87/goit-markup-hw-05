@@ -86,6 +86,7 @@ body {
 
 .header__nav-link--notactive {
     color: var(--black);
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header__nav-link--notactive:visited {
@@ -99,10 +100,23 @@ body {
 
 .header__nav-link--active {
     color: var(--blue);
+    position: relative;
 }
 
 .header__nav-link--active:visited {
     color: var(--blue);
+}
+
+.header__nav-link--active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--blue);
+    border-radius: 2px;
+    transform: translateY(33px);
 }
 
 .header__contact-list {
@@ -119,6 +133,7 @@ body {
     letter-spacing: 0.02em;
     color: var(--grey);
     text-decoration: none;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header__contact-link:visited {
@@ -241,6 +256,26 @@ body {
     gap: 30px;
 }
 
+.our-services__figure {
+    position: relative;
+    display: flex;
+}
+
+.our-services__caption {
+    position: absolute;
+    bottom: 0;
+    background: rgba(47, 48, 58, 0.8);
+    width: 370px;
+    padding: 27px 0;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.14;
+    text-align: center;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--white);
+}
+
 .our-team {
     background-color: var(--background-2);
 }
@@ -308,6 +343,8 @@ body {
     border-radius: 50%;
     padding: 12px;
     fill: var(--icon-grey);
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+        fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .our-team__icon:hover,
@@ -343,6 +380,8 @@ body {
     border: 1px solid var(--icon-grey);
     border-radius: 4px;
     fill: var(--icon-grey);
+    transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+        fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .our-clients__icon:hover,
@@ -405,6 +444,7 @@ body {
     letter-spacing: 0.03em;
     color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer__contact-element:hover,
@@ -438,6 +478,8 @@ body {
     background-color: rgba(255, 255, 255, 0.1);
     padding: 12px;
     fill: var(--white);
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+        fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer__icon:hover,
@@ -469,6 +511,9 @@ body {
     text-align: center;
     letter-spacing: 0.03em;
     color: var(--black);
+    transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+        color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .products__filters-button:hover,
@@ -491,6 +536,7 @@ body {
 .products__card {
     display: flex;
     flex-direction: column;
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .products__card:hover,
@@ -498,6 +544,33 @@ body {
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
         1px 4px 6px rgba(0, 0, 0, 0.16);
     cursor: pointer;
+}
+
+.products__picture-div {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+.products__overlay {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 370px;
+    height: 294px;
+    background: rgba(33, 150, 243, 0.9);
+    font-size: 18px;
+    line-height: 1.56;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    padding: 49px 45px 49px 24px;
+    transform: translateY(102%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.products__picture-div:hover .products__overlay {
+    transform: translateY(0);
 }
 
 .products__caption {
@@ -521,4 +594,46 @@ body {
     line-height: 1.875;
     letter-spacing: 0.03em;
     color: var(--grey);
+}
+
+.backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    top: 0;
+    left: 0;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal {
+    position: absolute;
+    width: 528px;
+    min-height: 581px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--white);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+        0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.modal__close-button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 8px;
+    right: 8px;
+    background: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 5px;
 }
